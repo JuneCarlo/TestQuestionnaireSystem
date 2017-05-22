@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbTestQuestionnaire" Class="DataClassesTestQuestionnaireDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=dbTestQuestionnaire;Integrated Security=True" SettingsObjectName="TestQuestionnaireSystem.Properties.Settings" SettingsPropertyName="dbTestQuestionnaireConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tblQuestion" Member="tblQuestions">
+    <Type Name="tblQuestion">
+      <Column Name="No" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Question" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Answer" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Choice1" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Choice2" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Choice3" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblTeacher_tblQuestion" Member="tblTeacher" ThisKey="T_ID" OtherKey="T_ID" Type="tblTeacher" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblTeacher" Member="tblTeachers">
+    <Type Name="tblTeacher">
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="T_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_UserType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblTeacher_tblQuestion" Member="tblQuestions" ThisKey="T_ID" OtherKey="T_ID" Type="tblQuestion" />
+      <Association Name="tblTeacher_tblScore" Member="tblScores" ThisKey="T_ID" OtherKey="T_ID" Type="tblScore" />
+      <Association Name="tblTeacher_tblSection" Member="tblSections" ThisKey="T_ID" OtherKey="T_ID" Type="tblSection" />
+      <Association Name="tblTeacher_tblStudent" Member="tblStudents" ThisKey="T_ID" OtherKey="T_ID" Type="tblStudent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblScore" Member="tblScores">
+    <Type Name="tblScore">
+      <Column Name="S_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="S_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Correct" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Wrong" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblTeacher_tblScore" Member="tblTeacher" ThisKey="T_ID" OtherKey="T_ID" Type="tblTeacher" IsForeignKey="true" />
+      <Association Name="tblStudent_tblScore" Member="tblStudent" ThisKey="S_ID" OtherKey="S_ID" Type="tblStudent" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblSection" Member="tblSections">
+    <Type Name="tblSection">
+      <Column Name="Section_ID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblTeacher_tblSection" Member="tblTeacher" ThisKey="T_ID" OtherKey="T_ID" Type="tblTeacher" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tblStudent" Member="tblStudents">
+    <Type Name="tblStudent">
+      <Column Name="S_ID" Type="System.String" DbType="VarChar(30) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="S_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="S_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="tblStudent_tblScore" Member="tblScores" ThisKey="S_ID" OtherKey="S_ID" Type="tblScore" />
+      <Association Name="tblTeacher_tblStudent" Member="tblTeacher" ThisKey="T_ID" OtherKey="T_ID" Type="tblTeacher" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_addQuestion" Method="sp_addQuestion">
+    <Parameter Name="No" Parameter="no" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Question" Parameter="question" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Answer" Parameter="answer" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Choice1" Parameter="choice1" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Choice2" Parameter="choice2" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Choice3" Parameter="choice3" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_viewTeacher" Method="sp_viewTeacher">
+    <ElementType Name="sp_viewTeacherResult">
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_addScore" Method="sp_addScore">
+    <Parameter Name="S_ID" Parameter="s_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_LastName" Parameter="s_LastName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="S_FirstName" Parameter="s_FirstName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Correct" Parameter="correct" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Wrong" Parameter="wrong" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_addSection" Method="sp_addSection">
+    <Parameter Name="Section_ID" Parameter="section_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_Name" Parameter="t_Name" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_addStudent" Method="sp_addStudent">
+    <Parameter Name="S_ID" Parameter="s_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_Username" Parameter="s_Username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_Password" Parameter="s_Password" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_LastName" Parameter="s_LastName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="S_FirstName" Parameter="s_FirstName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_name" Parameter="t_name" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_addTeacher" Method="sp_addTeacher">
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_Username" Parameter="t_Username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_Password" Parameter="t_Password" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_LastName" Parameter="t_LastName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="T_FirstName" Parameter="t_FirstName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="T_UserType" Parameter="t_UserType" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_countQuez" Method="sp_countQuez">
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_countQuezResult">
+      <Column Name="countQ" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_deleteTeacher" Method="sp_deleteTeacher">
+    <Parameter Name="T_LastName" Parameter="t_LastName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="T_FirstName" Parameter="t_FirstName" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_NameTeacher" Method="sp_NameTeacher">
+    <Parameter Name="T_FirstName" Parameter="t_FirstName" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_LastName" Parameter="t_LastName" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_NameTeacherResult">
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="T_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_UserType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveID" Method="sp_retrieveID">
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_retrieveIDResult">
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="T_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_UserType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveIDStudent" Method="sp_retrieveIDStudent">
+    <Parameter Name="S_ID" Parameter="s_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_retrieveIDStudentResult">
+      <Column Name="S_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="S_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="S_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveInfoStudent" Method="sp_retrieveInfoStudent">
+    <Parameter Name="S_LastName" Parameter="s_LastName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="S_FirstName" Parameter="s_FirstName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_retrieveInfoStudentResult">
+      <Column Name="S_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="S_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="S_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveName" Method="sp_retrieveName">
+    <Parameter Name="T_LastName" Parameter="t_LastName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="T_FirstName" Parameter="t_FirstName" Type="System.String" DbType="NVarChar(30)" />
+    <ElementType Name="sp_retrieveNameResult">
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="T_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_UserType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_RetrieveQuiz" Method="sp_RetrieveQuiz">
+    <Parameter Name="No" Parameter="no" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_RetrieveQuizResult">
+      <Column Name="No" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Question" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Answer" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Choice1" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Choice2" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Choice3" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveScore" Method="sp_retrieveScore">
+    <Parameter Name="S_ID" Parameter="s_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_retrieveScoreResult">
+      <Column Name="S_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="S_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Correct" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Wrong" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveSection" Method="sp_retrieveSection">
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_Name" Parameter="t_Name" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_retrieveSectionResult">
+      <Column Name="Section_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveStudent" Method="sp_retrieveStudent">
+    <Parameter Name="S_Username" Parameter="s_Username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_Password" Parameter="s_Password" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_retrieveStudentResult">
+      <Column Name="S_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="S_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="S_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveTeacher" Method="sp_retrieveTeacher">
+    <Parameter Name="T_Username" Parameter="t_Username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_Password" Parameter="t_Password" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_retrieveTeacherResult">
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="T_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_UserType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveUsernameStudent" Method="sp_retrieveUsernameStudent">
+    <Parameter Name="S_Username" Parameter="s_Username" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_retrieveUsernameStudentResult">
+      <Column Name="S_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="S_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="S_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_retrieveUsernameTeacher" Method="sp_retrieveUsernameTeacher">
+    <Parameter Name="T_Username" Parameter="t_Username" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_retrieveUsernameTeacherResult">
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="T_Username" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_Password" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_UserType" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_searchQuestion" Method="sp_searchQuestion">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_searchQuestionResult">
+      <Column Name="No" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Question" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_searchS" Method="sp_searchS">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="sp_searchSResult">
+      <Column Name="Section" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Teacher" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_searchStudent" Method="sp_searchStudent">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="sp_searchStudentResult">
+      <Column Name="Lastname" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Firstname" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_searchT" Method="sp_searchT">
+    <Parameter Name="key" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="sp_searchTResult">
+      <Column Name="[Last Name]" Member="Last_Name" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="[First Name]" Member="First_Name" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_sectionID" Method="sp_sectionID">
+    <ElementType Name="sp_sectionIDResult">
+      <Column Name="CountS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_SelectScore" Method="sp_SelectScore">
+    <Parameter Name="S_ID" Parameter="s_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_SelectScoreResult">
+      <Column Name="S_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="S_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="S_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Correct" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Wrong" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_selectSection" Method="sp_selectSection">
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_selectSectionResult">
+      <Column Name="Section_Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_selectSectioninGrade" Method="sp_selectSectioninGrade">
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_selectSectioninGradeResult">
+      <Column Name="Section_Name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_SelectTeacher" Method="sp_SelectTeacher">
+    <ElementType Name="sp_SelectTeacherResult">
+      <Column Name="T_LastName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="T_FirstName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_StudentID" Method="sp_StudentID">
+    <ElementType Name="sp_StudentIDResult">
+      <Column Name="CountS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_teacherID" Method="sp_teacherID">
+    <ElementType Name="sp_teacherIDResult">
+      <Column Name="CountT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_updateQuiz" Method="sp_updateQuiz">
+    <Parameter Name="No" Parameter="no" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Question" Parameter="question" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Answer" Parameter="answer" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Choice1" Parameter="choice1" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Choice2" Parameter="choice2" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Choice3" Parameter="choice3" Type="System.String" DbType="NVarChar(80)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_updateScore" Method="sp_updateScore">
+    <Parameter Name="S_ID" Parameter="s_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Correct" Parameter="correct" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Wrong" Parameter="wrong" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_updateSection" Method="sp_updateSection">
+    <Parameter Name="Section_ID" Parameter="section_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_Name" Parameter="t_Name" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_updateStudent" Method="sp_updateStudent">
+    <Parameter Name="S_ID" Parameter="s_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_Username" Parameter="s_Username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_Password" Parameter="s_Password" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_LastName" Parameter="s_LastName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="S_FirstName" Parameter="s_FirstName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_updateStudent1" Method="sp_updateStudent1">
+    <Parameter Name="S_ID" Parameter="s_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_Username" Parameter="s_Username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="S_Password" Parameter="s_Password" Type="System.String" DbType="VarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_UpdateTeacher" Method="sp_UpdateTeacher">
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_Username" Parameter="t_Username" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_Password" Parameter="t_Password" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_LastName" Parameter="t_LastName" Type="System.String" DbType="NVarChar(30)" />
+    <Parameter Name="T_FirstName" Parameter="t_FirstName" Type="System.String" DbType="NVarChar(30)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.sp_viewQuestion" Method="sp_viewQuestion">
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_viewQuestionResult">
+      <Column Name="No" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Question" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_ViewQuizNo" Method="sp_ViewQuizNo">
+    <Parameter Name="No" Parameter="no" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_ViewQuizNoResult">
+      <Column Name="No" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Section_Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Section_name" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Question" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Answer" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Choice1" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Choice2" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="Choice3" Type="System.String" DbType="NVarChar(80)" CanBeNull="true" />
+      <Column Name="T_ID" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_viewScore" Method="sp_viewScore">
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_name" Parameter="section_name" Type="System.String" DbType="VarChar(30)" />
+    <Parameter Name="Section_Grade" Parameter="section_Grade" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_viewScoreResult">
+      <Column Name="Lastname" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Firstname" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Correct" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Wrong" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_viewSection" Method="sp_viewSection">
+    <ElementType Name="sp_viewSectionResult">
+      <Column Name="Section" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Teacher" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.sp_viewStudent" Method="sp_viewStudent">
+    <Parameter Name="T_ID" Parameter="t_ID" Type="System.String" DbType="VarChar(30)" />
+    <ElementType Name="sp_viewStudentResult">
+      <Column Name="Lastname" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Firstname" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Section" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Grade" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
